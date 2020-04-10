@@ -14,7 +14,7 @@ const mapColorModes = (
 ) => {
   const colorModes = {} as { [k: string]: ColorMode };
 
-  Object.entries(modes).map(([key, value]) => {
+  Object.entries(modes).forEach(function([key, value]) {
     colorModes[key] = mapReadableColors(value, options);
   });
 
@@ -24,7 +24,7 @@ const mapColorModes = (
 const mapReadableColors = (colors: ColorMode, options?: Options) => {
   const readableColors = {} as ColorMode;
 
-  Object.entries(colors).map(([key, value]) => {
+  Object.entries(colors).forEach(function([key, value]) {
     if (typeof value === 'string') {
       readableColors[`${key}ReadableColor`] = readableColor(
         value,
