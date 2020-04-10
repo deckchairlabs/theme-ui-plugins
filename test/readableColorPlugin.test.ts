@@ -2,6 +2,16 @@ import { readableColorPlugin } from '../src';
 import { Theme } from 'theme-ui';
 
 describe('readableColorPlugin', () => {
+  it('just returns the theme if no colors are defined', () => {
+    const theme: Theme = {
+      useCustomProperties: true,
+    };
+
+    const plugin = readableColorPlugin();
+    expect(plugin(theme)).toStrictEqual({
+      useCustomProperties: true,
+    });
+  });
   it('adds readable colors to theme definition', () => {
     const theme: Theme = {
       useCustomProperties: true,
