@@ -63,6 +63,43 @@ describe('readableColorPlugin', () => {
     });
   });
 
+  it('can exclude colors', () => {
+    const theme: Theme = {
+      colors: {
+        background: '#fff',
+        primary: 'blue',
+        text: '#000',
+        modes: {
+          dark: {
+            background: '#000',
+            text: '#fff',
+          },
+        },
+      },
+    };
+
+    const plugin = readableColorPlugin({
+      exclude: ['text'],
+    });
+
+    expect(plugin(theme)).toStrictEqual({
+      colors: {
+        background: '#fff',
+        backgroundReadableColor: '#000',
+        primary: 'blue',
+        primaryReadableColor: '#fff',
+        text: '#000',
+        modes: {
+          dark: {
+            background: '#000',
+            backgroundReadableColor: '#fff',
+            text: '#fff',
+          },
+        },
+      },
+    });
+  });
+
   it('can handle color modes', () => {
     const theme: Theme = {
       colors: {

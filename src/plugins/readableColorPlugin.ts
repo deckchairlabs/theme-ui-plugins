@@ -4,8 +4,9 @@ import * as CSS from 'csstype';
 import { readableColor } from 'polished';
 
 type Options = {
-  lightColor: CSS.ColorProperty;
-  darkColor: CSS.ColorProperty;
+  exclude?: string[];
+  lightColor?: CSS.ColorProperty;
+  darkColor?: CSS.ColorProperty;
 };
 
 const mapColorModes = (
@@ -25,6 +26,10 @@ const mapReadableColors = (colors: ColorMode, options?: Options) => {
   const readableColors = {} as ColorMode;
 
   Object.entries(colors).forEach(function([key, value]) {
+    if (options?.exclude && options.exclude.includes(key)) {
+      return;
+    }
+
     if (typeof value === 'string') {
       readableColors[`${key}ReadableColor`] = readableColor(
         value,
